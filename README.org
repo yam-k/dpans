@@ -1,0 +1,39 @@
+[[https://g000001.cddddr.org/3676298293]]を参考に、dpansのpdfを作った。
+ソースとなるアーカイブは、
+[[http://cs.cmu.edu/afs/cs/Web/Groups/AI/lang/lisp/doc/standard/ansi/dpans/]]
+から取得した。
+
+* 前提
+- OS :: ubuntu
+- 必須コマンド :: dvipdf pdfunite
+- dpsans3のみ必要なコマンド :: uncompress
+
+多分、 =sudo apt install texlive-full= をやれば全部入る。
+
+* dpans*.tgzからPDFを作成したコマンド
+** dpans1.pdf
+#+begin_src bash
+  tar xvf dpans1.tgz
+  cd dpANS1
+  for f in chap-*.dvi; do dvipdf $f; done
+  pdfunite chap-*.pdf dpans1.pdf
+#+end_src
+
+** dpans2.pdf
+#+begin_src bash
+  tar xvf dpans2.tgz
+  cd dpANS2
+  for f in chap-*.dvi; do dvipdf $f; done
+  pdfunite chap-*.pdf dpans2.pdf
+#+end_src
+
+** dpans3.pdf
+#+begin_src bash
+  tar xvf dpans3.tgz
+  tar xvf dpans3r.tgz
+  mv dpANS3R/* dpANS3/
+  cd dpANS3
+  uncompress *.dvi.Z
+  for f in chap-*.dvi; do dvipdf $f; done
+  pdfunite chap-*.pdf dpans3.pdf
+#+end_src
